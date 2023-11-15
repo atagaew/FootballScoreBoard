@@ -249,6 +249,27 @@ namespace SportRadar.FootballScoreBoard.Tests.UnitTests
             action.Should().Throw<ArgumentException>().WithMessage("End time cannot be less than start time.*");
         }
 
+        [Fact]
+        public void WhenFinishMatch_AndTheMatchIsAlreadyFinished_Then_ItShouldThrowAnException()
+        {
+            // Arrange
+            var customStartDate = DateTimeOffset.Now.AddDays(Faker.RandomNumber.Next(-100, -200));
+            var customEndDate = DateTimeOffset.Now.AddDays(Faker.RandomNumber.Next(-1, -99));
+            var match = new Match(Faker.Country.Name(), Faker.Country.Name(), Faker.RandomNumber.Next(0, 200), Faker.RandomNumber.Next(0, 200), customStartDate);
+            var homeTeamFinalScore = Faker.RandomNumber.Next(0, 200);
+            var awayTeamFinalScore = Faker.RandomNumber.Next(0, 200);
+            var finishedMatch = match.FinishMatch(homeTeamFinalScore, awayTeamFinalScore, customEndDate);
+
+            // Action
+            Action action = () =>
+            {
+                finishedMatch.FinishMatch(homeTeamFinalScore, awayTeamFinalScore, customEndDate);
+            };
+
+            // Assert
+            action.Should().Throw<ArgumentException>().WithMessage("Can't finish the match that's alrady finished.*");
+        }
+
         [Theory]
         [MemberData(nameof(TestNegativeScoreData))]
         public void WhenFinishMatch_AndScoreIsNegative_Then_ThereShouldBeAnException(int homeTeamScore, int awayTeamScore)

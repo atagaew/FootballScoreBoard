@@ -51,6 +51,9 @@ public class Match
 
     public Match FinishMatch(int homeTeamFinalScore, int awayTeamFinalScore, DateTimeOffset? endTime)
     {
+        if (EndTime.HasValue)
+            throw new ArgumentException("Can't finish the match that's alrady finished.", nameof(endTime));
+
         VerifyScore(homeTeamFinalScore, awayTeamFinalScore);
         if (endTime.HasValue && endTime.Value < StartTime)
             throw new ArgumentException("End time cannot be less than start time.", nameof(endTime));

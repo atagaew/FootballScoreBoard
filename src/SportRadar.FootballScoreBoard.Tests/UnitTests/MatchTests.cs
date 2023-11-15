@@ -8,8 +8,8 @@ namespace SportRadar.FootballScoreBoard.Tests.UnitTests
         public void WhenCreatingNewMatch_Then_ItShouldReturnAllProperties()
         {
             // Arrange
-            var homeScore = Faker.RandomNumber.Next();
-            var awayScore = Faker.RandomNumber.Next();
+            var homeScore = Faker.RandomNumber.Next(0, 200);
+            var awayScore = Faker.RandomNumber.Next(0, 200);
 
             var homeTeam = Faker.Company.Name();
             var awayTeam = Faker.Company.Name();
@@ -19,8 +19,8 @@ namespace SportRadar.FootballScoreBoard.Tests.UnitTests
             var sut = new Match(homeTeam, awayTeam, homeScore, awayScore);
 
             // Assert
-            sut.HomeScore.Should().Be(homeScore);
-            sut.AwayScore.Should().Be(awayScore);
+            sut.HomeTeamScore.Should().Be(homeScore);
+            sut.AwayTeamScore.Should().Be(awayScore);
             sut.HomeTeam.Should().Be(homeTeam);
             sut.AwayTeam.Should().Be(awayTeam);
 
@@ -42,8 +42,8 @@ namespace SportRadar.FootballScoreBoard.Tests.UnitTests
             var sut = new Match(homeTeam, awayTeam);
 
             // Assert
-            sut.HomeScore.Should().Be(0);
-            sut.AwayScore.Should().Be(0);
+            sut.HomeTeamScore.Should().Be(0);
+            sut.AwayTeamScore.Should().Be(0);
             sut.HomeTeam.Should().Be(homeTeam);
             sut.AwayTeam.Should().Be(awayTeam);
 
@@ -89,7 +89,6 @@ namespace SportRadar.FootballScoreBoard.Tests.UnitTests
             action.Should().Throw<ArgumentException>();
         }
 
-
         public static IEnumerable<object[]> TestNegativeScoreData()
         {
             yield return new object[] { -1, 0 };
@@ -110,6 +109,46 @@ namespace SportRadar.FootballScoreBoard.Tests.UnitTests
 
             // Assert
             action.Should().Throw<ArgumentException>().WithMessage("Score cannot be less than zero.*");
+        }
+
+        [Theory]
+        [MemberData(nameof(TestNegativeScoreData))]
+        public void WhenUpdateMatch_AndScoreIsNegative_Then_ThereShouldBeAnException(int homeTeamScore, int awayTeamScore)
+        {
+            // Arrange
+            var match = new Match(Faker.Country.Name(), Faker.Country.Name(), Faker.RandomNumber.Next(0, 200), Faker.RandomNumber.Next(0, 200));
+
+            // Action
+            Action action = () =>
+            {
+                match.UpdateScore(homeTeamScore, awayTeamScore);
+            };
+
+            // Assert
+            action.Should().Throw<ArgumentException>().WithMessage("Score cannot be less than zero.*");
+        }
+
+        [Fact]
+        public void WhenUpdateMatch_ItShouldReturnNewInstanceOfTheMatch_AndInformationFieldsShouldBeTheSame()
+        {
+            // Arrange
+            var match = new Match(Faker.Country.Name(), Faker.Country.Name(), Faker.RandomNumber.Next(0, 200), Faker.RandomNumber.Next(0, 200));
+
+            // Action
+            var homeTeamUpdatedScore = Faker.RandomNumber.Next(0, 200);
+            var awayTeamUpdatedScore = Faker.RandomNumber.Next(0, 200);
+            var updatedMatch = match.UpdateScore(homeTeamUpdatedScore, awayTeamUpdatedScore);
+
+            // Assert
+            updatedMatch.Should().NotBeEquivalentTo(match);
+            updatedMatch.HomeTeamScore.Should().Be(homeTeamUpdatedScore);
+            updatedMatch.AwayTeamScore.Should().Be(awayTeamUpdatedScore);
+            updatedMatch.Id.Should().Be(match.Id);
+            updatedMatch.HomeTeam.Should().Be(match.HomeTeam);
+            updatedMatch.AwayTeam.Should().Be(match.AwayTeam);
+            updatedMatch.CreatedTime.Should().Be(match.CreatedTime);
+            updatedMatch.StartTime.Should().Be(match.StartTime);
+            updatedMatch.EndTime.Should().Be(match.EndTime);
         }
     }
 }

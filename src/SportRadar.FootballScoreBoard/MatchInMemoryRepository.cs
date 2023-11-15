@@ -14,6 +14,19 @@ public class MatchInMemoryRepository : IMatchRepository
         _matches.Add(match);
     }
 
+    public void Update(Match match)
+    {
+        var findIndex = _matches.FindIndex(m => m.Id == match.Id);
+        if (findIndex >= 0)
+        {
+            _matches[findIndex] = match;
+        }
+        else
+        { 
+            throw new InvalidOperationException($"Match with id {match.Id} not found");
+        }
+    }
+
     public IEnumerable<Match> GetAll()
     {
         return _matches;

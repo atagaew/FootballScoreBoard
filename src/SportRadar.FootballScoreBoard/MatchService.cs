@@ -13,5 +13,10 @@
         {
             _matchRepository.Add(matchInfo);
         }
+
+        public void Update(Match matchInfo)
+        {
+            _matchRepository.Update(matchInfo);
+        }
     }
 }

@@ -88,5 +88,28 @@ namespace SportRadar.FootballScoreBoard.Tests.UnitTests
             // Assert
             action.Should().Throw<ArgumentException>();
         }
+
+
+        public static IEnumerable<object[]> TestNegativeScoreData()
+        {
+            yield return new object[] { -1, 0 };
+            yield return new object[] { -1, 1 };
+            yield return new object[] { 0, -1 };
+            yield return new object[] { 1, -1 };
+            yield return new object[] { -1, -1 };
+        }
+
+        [Theory]
+        [MemberData(nameof(TestNegativeScoreData))]
+        public void WhenCreatingNewMatch_AndScoreIsNegative_Then_ThereShouldBeAnException(int homeTeamScore, int awayTeamScore)
+        {
+            // Arrange
+
+            // Action
+            Action action = () => new Match(Faker.Country.Name(), Faker.Country.Name(), homeTeamScore, awayTeamScore);
+
+            // Assert
+            action.Should().Throw<ArgumentException>().WithMessage("Score cannot be less than zero.*");
+        }
     }
 }

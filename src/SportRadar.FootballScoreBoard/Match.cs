@@ -15,6 +15,12 @@ public class Match
         if (string.IsNullOrEmpty(awayTeam))
             throw new ArgumentException("Value cannot be null or empty.", nameof(homeTeam));
 
+        if (homeScore < 0)
+            throw new ArgumentException("Score cannot be less than zero.", nameof(homeScore));
+
+        if (awayScore < 0)
+            throw new ArgumentException("Score cannot be less than zero.", nameof(awayScore));
+
         Id = Guid.NewGuid();
         HomeTeam = homeTeam;
         AwayTeam = awayTeam;

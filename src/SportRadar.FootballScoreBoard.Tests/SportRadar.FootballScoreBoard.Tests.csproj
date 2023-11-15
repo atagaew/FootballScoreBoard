@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="faker.net" Version="$(Faker)" />
+    <PackageReference Include="Moq" Version="$(MoqLib)" />
+    <PackageReference Include="AutoFixture" Version="$(AutoFixture)" />
+    <PackageReference Include="FluentAssertions" Version="$(FluentAssertions)" />
+
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(TestSDKLib)" />
+    <PackageReference Include="xunit" Version="$(XUnitLib)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(XUnitVisualStudioLib)">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="3.2.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SportRadar.FootballScoreBoard\SportRadar.FootballScoreBoard.csproj" />
+  </ItemGroup>
+
+</Project>

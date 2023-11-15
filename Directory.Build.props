@@ -1,0 +1,32 @@
+<Project>
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)SportRadar.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>preview</LangVersion>
+    <Nullable>enable</Nullable>
+    <UseRazorBuildServer>false</UseRazorBuildServer>
+    <DebugType>Full</DebugType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <NoWarn>NU1608</NoWarn>
+  </PropertyGroup> 
+ 
+  <PropertyGroup>
+    <DefaultItemExcludes>.git\**;$(DefaultItemExcludes)</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="[1.1.118]">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Faker>2.0.154</Faker>
+    <MoqLib>4.20.69</MoqLib>
+    <AutoFixture>4.18.0</AutoFixture>
+    <FluentAssertions>6.11.0</FluentAssertions>
+    <TestSDKLib>17.5.0</TestSDKLib>
+    <XUnitLib>2.4.2</XUnitLib>
+    <XUnitVisualStudioLib>2.4.5</XUnitVisualStudioLib>
+  </PropertyGroup>
+</Project>

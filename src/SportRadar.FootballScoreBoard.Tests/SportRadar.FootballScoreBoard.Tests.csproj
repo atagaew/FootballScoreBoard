@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <PackageReference Include="faker.net" Version="$(Faker)" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Moq" Version="$(MoqLib)" />
     <PackageReference Include="AutoFixture" Version="$(AutoFixture)" />
     <PackageReference Include="FluentAssertions" Version="$(FluentAssertions)" />

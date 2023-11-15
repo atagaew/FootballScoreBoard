@@ -9,6 +9,7 @@ namespace Taskmaverick.SelfSignUp.Services
         {
             services.AddScoped<IMatchService, MatchService>();
             services.AddScoped<IMatchReportService, MatchReportService>();
+            services.AddScoped<IMatchRepository, MatchInMemoryRepository>();
             return services;
         }
     }

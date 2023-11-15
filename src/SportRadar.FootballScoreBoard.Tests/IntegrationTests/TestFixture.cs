@@ -5,15 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Moq;
 using Taskmaverick.SelfSignUp.Services;
 
 namespace SportRadar.FootballScoreBoard.Tests.IntegrationTests
 {
-    public class TestFixture : IAsyncLifetime
+    public class TestFixture : IAsyncLifetime, IDisposable
     {
         public IHost Host { get; private set; }
 
         public IServiceScope Scope { get; private set; }
+
+        internal Mock<IMatchRepository> MockMatchRepository { get; set; }
 
         public async Task InitializeAsync()
         {
@@ -21,6 +24,10 @@ namespace SportRadar.FootballScoreBoard.Tests.IntegrationTests
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddFootballScoreBoardServices();
+                    if (MockMatchRepository != null)
+                    {
+                        services.AddScoped<IMatchRepository>(_ => MockMatchRepository.Object);
+                    }
                 })
                 .Build();
 
@@ -32,6 +39,12 @@ namespace SportRadar.FootballScoreBoard.Tests.IntegrationTests
             Scope.Dispose();
             Host.Dispose();
             return Task.CompletedTask;
+        }
+
+        public void Dispose()
+        {
+            Scope.Dispose();
+            Host.Dispose();
         }
     }
 }

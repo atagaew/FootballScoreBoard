@@ -3,11 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace SportRadar.FootballScoreBoard.Tests.IntegrationTests;
 
-public class MatchReposioryTests : IClassFixture<TestFixture>
+public class MatchReportServiceTests : IClassFixture<TestFixture>
 {
     private readonly TestFixture _testFixture;
 
-    public MatchReposioryTests(TestFixture testFixture)
+    public MatchReportServiceTests(TestFixture testFixture)
     {
         _testFixture = testFixture;
     }
@@ -17,13 +17,15 @@ public class MatchReposioryTests : IClassFixture<TestFixture>
     {
         // Arrange
         var matchService = _testFixture.Scope.ServiceProvider.GetService<IMatchService>();
-        var matchRepository = _testFixture.Scope.ServiceProvider.GetService<IMatchRepository>();
-        var matchInfo = new Match(Faker.Country.Name(), Faker.Country.Name());
+        var matchReportService = _testFixture.Scope.ServiceProvider.GetService<IMatchReportService>();
+        var homeTeam = Faker.Country.Name();
+        var awayTeam = Faker.Country.Name();
+        var matchInfo = new Match(homeTeam, awayTeam);
 
         // Action
         matchService.Create(matchInfo);
 
         // Assert
-        matchRepository.GetAll().Where(f => f.Id == matchInfo.Id).Should().NotBeNull();
+        matchReportService.Summary().Where(f => f.Id == matchInfo.Id).Should().NotBeNull();
     }
 }

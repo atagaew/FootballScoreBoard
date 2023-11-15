@@ -2,7 +2,7 @@ using FluentAssertions;
 
 namespace SportRadar.FootballScoreBoard.Tests.UnitTests
 {
-    public class MatchTests
+    public partial class MatchTests
     {
         [Fact]
         public void WhenCreatingNewMatch_Then_ItShouldReturnAllProperties()
@@ -88,6 +88,5 @@ namespace SportRadar.FootballScoreBoard.Tests.UnitTests
             // Assert
             action.Should().Throw<ArgumentException>();
         }
-
     }
 }

@@ -38,6 +38,7 @@ namespace SportRadar.FootballScoreBoard.Tests.IntegrationTests
         {
             Scope.Dispose();
             Host.Dispose();
+
             return Task.CompletedTask;
         }
 

@@ -27,6 +27,11 @@ public class MatchInMemoryRepository : IMatchRepository
         }
     }
 
+    public Match GetMatch(Guid id)
+    {
+        return _matches.FirstOrDefault(m => m.Id == id);
+    }
+
     public IEnumerable<Match> GetAll()
     {
         return _matches;

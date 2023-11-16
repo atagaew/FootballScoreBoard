@@ -57,4 +57,33 @@ public class MatchServiceTests : IClassFixture<TestFixture>
         // Assert
         act.Should().Throw<InvalidOperationException>().WithMessage("Match with id * not found");
     }
+
+    [Fact]
+    public void WhenUpdateExistingMatch_AndSuchMatchIsAlreadyFinished_ThenItShouldThrowNotFoundException()
+    {
+        // Arrange
+        var matchService = _testFixture.Scope.ServiceProvider.GetService<IMatchService>();
+        var matchInfo = new Match(Faker.Country.Name(), Faker.Country.Name());
+
+        // Action
+        Action act = () => matchService.Update(matchInfo);
+
+        // Assert
+        act.Should().Throw<InvalidOperationException>().WithMessage("Match with id * not found");
+    }
+
+    [Fact]
+    public void WhenFinishExistingMatch_AndThereIsNoEndDateOfMatch_ThenItShouldThrowAnException()
+    {
+        // Arrange
+        var matchService = _testFixture.Scope.ServiceProvider.GetService<IMatchService>();
+        var matchInfo = new Match(Faker.Country.Name(), Faker.Country.Name());
+        matchService.Create(matchInfo);
+
+        // Action
+        Action act = () => matchService.Finish(matchInfo);
+
+        // Assert
+        act.Should().Throw<ArgumentException>().WithMessage("Finished match should have the EndTime*");
+    }
 }

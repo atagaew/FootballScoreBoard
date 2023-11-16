@@ -91,4 +91,9 @@ public class Match
         if (awayScore < 0)
             throw new ArgumentException("Score cannot be less than zero.", nameof(awayScore));
     }
+
+    public override string ToString()
+    {
+        return $"{HomeTeam} {HomeTeamScore} - {AwayTeam} {AwayTeamScore}";
+    }
 }

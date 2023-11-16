@@ -11,6 +11,10 @@ public class MatchReportService : IMatchReportService
 
     public IEnumerable<Match> Summary()
     {
-        return _matchRepository.GetAll();
+        return _matchRepository
+            .GetAll()
+            .Where(f => !f.EndTime.HasValue)
+            .OrderByDescending(k=>k.AwayTeamScore+k.HomeTeamScore).
+            ThenByDescending(k=>k.StartTime);
     }
 }

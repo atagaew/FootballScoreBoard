@@ -7,4 +7,5 @@ public interface IMatchRepository
     void Update(Match match);
 
     IEnumerable<Match> GetAll();
+    Match GetMatch(Guid id);
 }

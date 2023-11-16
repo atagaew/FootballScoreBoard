@@ -25,20 +25,49 @@ Welcome to the Live Football World Cup Scoreboard library! This library is desig
 
 To integrate the Live Football World Cup Scoreboard library into your project, follow these simple steps:
 
-1. Download the library files or include them via a package manager.
+1. Download the library files or add them as a project reference.
 
-2. Include the library in your project.
-
-   ```C#
-   
-   ```
-
-3. Start managing live scores and matches!
-
-## Usage Example
+2. Register the library services in your application startup class.
 
 ```C#
+    Host.CreateDefaultBuilder(args)
+        .ConfigureServices((hostContext, services) =>
+        {
+            services.AddFootballScoreBoardServices();
+        });
 ```
+
+3. Inject the library services into your application classes.
+
+```C#
+    private readonly IMatchService _matchService;
+    private readonly IMatchReportService _matchReportService;
+
+    public ConsoleApplication(IMatchService matchService, IMatchReportService matchReportService)
+    {
+        _matchService = matchService;
+        _matchReportService = matchReportService;
+    }
+```	
+
+4. Start managing live scores and matches!
+
+```C#
+    // Initialize a new match
+    var mexicoCanada = _matchService.Create(new Match("Mexico", "Canada")
+    _matchService.Create(mexicoCanada);
+
+    // Update the score of an ongoing match
+    _matchService.Update(mexicoCanada.UpdateScore(0, 6));
+
+    // Finish a match
+    _matchService.Finish(mexicoCanada.FinishMatch(0, 6));
+
+    // Get a summary of ongoing matches
+    _matchReportService.Summary();
+```
+
+You can check working application in the Playground project.
 
 ## Contribution Guidelines
 

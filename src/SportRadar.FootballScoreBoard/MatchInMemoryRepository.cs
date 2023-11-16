@@ -1,6 +1,6 @@
 ﻿namespace SportRadar.FootballScoreBoard;
 
-public class MatchInMemoryRepository : IMatchRepository
+internal class MatchInMemoryRepository : IMatchRepository
 {
     private readonly List<Match> _matches;
 

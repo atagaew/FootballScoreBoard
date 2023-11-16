@@ -2,7 +2,7 @@
 
 namespace SportRadar.FootballScoreBoard
 {
-    public class MatchService : IMatchService
+    internal class MatchService : IMatchService
     {
         private readonly IMatchRepository _matchRepository;
 

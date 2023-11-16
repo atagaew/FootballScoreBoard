@@ -67,7 +67,7 @@ To integrate the Live Football World Cup Scoreboard library into your project, f
     _matchReportService.Summary();
 ```
 
-You can check working application in the Playground project.
+You can check working application in the [SportRadar.FootballScoreBoard.Playground](https://github.com/atagaew/FootballScoreBoard/blob/master/src/SportRadar.FootballScoreBoard.Playground/ConsoleApplication.cs) project.
 
 ## Contribution Guidelines
 

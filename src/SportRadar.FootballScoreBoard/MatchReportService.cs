@@ -1,5 +1,8 @@
 ﻿namespace SportRadar.FootballScoreBoard;
 
+/// <summary>
+/// Returns actual matches.
+/// </summary>
 internal class MatchReportService : IMatchReportService
 {
     private readonly IMatchRepository _matchRepository;
@@ -9,6 +12,9 @@ internal class MatchReportService : IMatchReportService
         _matchRepository = matchRepository;
     }
 
+    /// <summary>
+    /// Returns summary report of inprogress matches.
+    /// </summary>
     public IEnumerable<Match> Summary()
     {
         return _matchRepository

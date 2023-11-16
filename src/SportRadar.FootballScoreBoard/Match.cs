@@ -1,5 +1,8 @@
 ﻿namespace SportRadar.FootballScoreBoard;
 
+/// <summary>
+/// Information about the match.
+/// </summary>
 public class Match
 {
     public Match(string homeTeam, string awayTeam)
@@ -32,6 +35,9 @@ public class Match
         EndTime = default;
     }
 
+    /// <summary>
+    /// Creates copy of the match with updated score.
+    /// </summary>
     public Match UpdateScore(int homeTeamScore, int awayTeamScore)
     {
         VerifyScore(homeTeamScore, awayTeamScore);
@@ -44,11 +50,17 @@ public class Match
         };
     }
 
+    /// <summary>
+    /// Creates copy of the finished match with updated score.
+    /// </summary>
     public Match FinishMatch(int homeTeamFinalScore, int awayTeamFinalScore)
     {
         return FinishMatch(homeTeamFinalScore, awayTeamFinalScore, null);
     }
 
+    /// <summary>
+    /// Creates copy of the finished match with updated score.
+    /// </summary>
     public Match FinishMatch(int homeTeamFinalScore, int awayTeamFinalScore, DateTimeOffset? endTime)
     {
         if (EndTime.HasValue)
@@ -67,20 +79,44 @@ public class Match
         };
     }
 
+    /// <summary>
+    /// Gets internal id of the match.
+    /// </summary>
     public Guid Id { get; private set; }
 
+    /// <summary>
+    /// Gets home team name.
+    /// </summary>
     public string HomeTeam { get; private set; }
 
+    /// <summary>
+    /// Gets away team name.
+    /// </summary>
     public string AwayTeam { get; private set; }
 
+    /// <summary>
+    /// Gets home team score.
+    /// </summary>
     public int HomeTeamScore { get; private set; }
 
+    /// <summary>
+    /// Gets away team score.
+    /// </summary>
     public int AwayTeamScore { get; private set; }
 
+    /// <summary>
+    /// Gets time of match record initial creation.
+    /// </summary>
     public DateTimeOffset CreatedTime { get; private set; }
 
+    /// <summary>
+    /// Gets time when the match was started.
+    /// </summary>
     public DateTimeOffset StartTime { get; private set; }
 
+    /// <summary>
+    /// Gets time when the match was finished.
+    /// </summary>
     public DateTimeOffset? EndTime { get; private set; }
 
     private static void VerifyScore(int homeScore, int awayScore)

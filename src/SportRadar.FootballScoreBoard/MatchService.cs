@@ -11,11 +11,17 @@ namespace SportRadar.FootballScoreBoard
             _matchRepository = matchRepository;
         }
 
+        /// <summary>
+        /// Create new match in the library.
+        /// </summary>
         public void Create(Match matchInfo)
         {
             _matchRepository.Add(matchInfo);
         }
 
+        /// <summary>
+        /// Update existing match in the library.
+        /// </summary>
         public void Update(Match matchInfo)
         {
             CheckTheMatchIsInProgress(matchInfo);
@@ -23,6 +29,9 @@ namespace SportRadar.FootballScoreBoard
             _matchRepository.Update(matchInfo);
         }
 
+        /// <summary>
+        /// Finish existing match in the library.
+        /// </summary>
         public void Finish(Match matchInfo)
         {
             CheckTheMatchIsInProgress(matchInfo);

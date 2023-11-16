@@ -29,7 +29,6 @@ public class ConsoleApplication
         _matchService.Create(uruguayItaly);
         _matchService.Create(argentinaAustralia);
 
-
         var summaryReport = _matchReportService.Summary().ToArray();
         foreach (var match in summaryReport)
         {

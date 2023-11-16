@@ -137,6 +137,5 @@ public class MatchServiceTests : IClassFixture<TestFixture>
 
         // Assert
         act.Should().Throw<InvalidOperationException>().WithMessage("Match with id * not found");
-
     }
 }

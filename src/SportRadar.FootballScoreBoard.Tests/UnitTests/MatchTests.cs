@@ -78,7 +78,6 @@ namespace SportRadar.FootballScoreBoard.Tests.UnitTests
             sut.StartTime.Should().Be(customStartTime);
             sut.EndTime.Should().BeNull();
             sut.Id.Should().NotBeEmpty();
-
         }
 
         [Fact]

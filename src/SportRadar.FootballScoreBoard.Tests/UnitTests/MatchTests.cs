@@ -266,7 +266,7 @@ namespace SportRadar.FootballScoreBoard.Tests.UnitTests
             };
 
             // Assert
-            action.Should().Throw<ArgumentException>().WithMessage("Can't finish the match that's alrady finished.*");
+            action.Should().Throw<ArgumentException>().WithMessage("Can't finish the match that's already finished.*");
         }
 
         [Theory]

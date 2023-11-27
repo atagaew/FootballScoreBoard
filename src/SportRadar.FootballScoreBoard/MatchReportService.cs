@@ -23,4 +23,17 @@ internal class MatchReportService : IMatchReportService
             .OrderByDescending(k=>k.AwayTeamScore+k.HomeTeamScore).
             ThenByDescending(k=>k.StartTime);
     }
+
+    public int? GetTeamScores(string teamName)
+    {
+        var match = _matchRepository
+            .GetAll()
+            .Where(f => !f.EndTime.HasValue)
+            .FirstOrDefault(match => match.HomeTeam == teamName || match.AwayTeam == teamName);
+
+        if (match == null)
+            return null;
+        
+        return match.HomeTeam == teamName ? match.HomeTeamScore : match.AwayTeamScore;
+    }
 }

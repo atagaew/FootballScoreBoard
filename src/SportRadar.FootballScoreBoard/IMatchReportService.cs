@@ -9,4 +9,6 @@ public interface IMatchReportService
     /// Returns summary report of inprogress matches.
     /// </summary>
     IEnumerable<Match> Summary();
+
+    int? GetTeamScores(string teamName);
 }
